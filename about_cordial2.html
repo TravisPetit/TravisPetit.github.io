@@ -1,0 +1,39 @@
+<h3>
+    Note: most of the links here will only work in the DBE intranet.
+</h3>
+
+<h2>
+    What Cordial is
+</h2>
+<a href=https://dbe-gitlab.dbe.unibas.ch/simon.pezold/cordial/>Cordial</a> is a program developed for the PHD thesis of Simon Pezold. It is able to:
+
+<ul>
+    <li> Semi-automatically segment the spinal cord out of an MRI scan of the brain. </li>
+    <li> Semi-automatically compute two cuts of the segmentation produced in step 1 that single out the cervical area. </li>
+    <li> Compute the volume and cross-sectional area of the of the result produced in step 2. </li>
+</ul>
+
+Cordial was originally programmed in Python 2.7, and has then been <a href="https://dbe-gitlab.dbe.unibas.ch/simon.pezold/cordial_python3"> ported to Python 3</a>. However this latter version of Cordial has never been used in production.
+
+<h2>
+    What Cordial 2 is
+</h2>
+<a href="https://dbe-gitlab.dbe.unibas.ch/travis.riverapetit/cordial-server">Cordial 2</a> is an extension of Cordial. Its features are described in the following four paragraphs.
+
+<p>
+<b>Automatic segmentation of the spinal cord</b>. Cordial offers a tool for for the semi-automatic segmentation of the spinal cord using an energy-based approach, this requires the user to manually give the program a hint on what the foreground and background of an image are. Cordial 2 replaces this tool a fully automatic one by using a multi-dimensional gated recurrent unit (MDGRU, for more information on this, see the <a href="literature.html"> literature</a>) to segment each image. The upsides of this are twofold: it needs no human intervention and it also gives better results. However this has a downside too. While the original cordial segmentation can be done in seconds once the user gives their inputs, this deep learning approach takes usually ~ 10 to 15 minutes to segment each image.
+</p>
+
+<p>
+<b>Automatic localisation of landmarks </b>. In order to compute the cuts that single out the cervical area of the spinal cord, two
+parameters are needed: <tt>pons</tt>, a point located at the cisterna pontis, and <tt>c2c3</tt>, a point located at the intervertebral disk. In Cordial both of these must be entered manually. Cordial 2 automates the process of finding them by using an MDGRU. This has the same advantages mentioned in the previous paragraph, and its inference is quick too, taking only seconds to find each point.
+</p>
+
+<p>
+<b>Statistics tool</b>. Locating the <tt>c2c3</tt> and <tt>pons</tt> landmarks is necessary but not sufficient to calculate the volume and cross sectional area of an image. Two more variables are needed, namely <tt>steps_range</tt>, the length in mm of the spinal cord segment to be measured, and <tt>spin_value</tt>, the distance in mm between the upper spinal cord segmentation limits and the cisterna pontis. In Cordial a user must enter these values manually, trying out different values of until a satisfactory result is achieved. Cordial 2 offers a graphical interface that helps the user in deciding the values of these variables by displaying relevant statistical information for each input candidate.
+</p>
+
+<p>
+<b>Server-side</b>. We expect the end-users to have a large number of medical images they want to analyze. Because of this, running Cordial 2 locally is often not plausible since some steps in the segmentation pipeline are computationally expensive. Hence, in Cordial 2 users to push their medical images to the cloud, where all of the computations are done for them. Once complete they are downloaded and merged into the file system.
+</p>
+
