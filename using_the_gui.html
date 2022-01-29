@@ -6,11 +6,50 @@ Readers interested in managing the server-side of Cordial 2 are advised to read 
 
 
 <p>
-When firing up Cordial 2, the user is greeted with the Widget shown below in Fig. 1. It is comprised of three tabs (Overview, Server and Statistics) and a scrollable menu called <u>F</u>ile.
+When firing up Cordial 2, the user is greeted with the Widget shown below in Fig. 1. It is comprised of three tabs (Overview, Server and Statistics) and a menu bar called <u>F</u>ile.
 </p>
 
 <figure>
-    <!--- <img src="main_widget.png" alt="The main widget", style="width:600;height:600;"> --->
-    <img src="main_widget.png" alt="The main widget">
+    <img src="images/main_widget.png" alt="The main widget">
     <figcaption>Fig.1 The main widget.</figcaption>
 </figure>
+
+<h3>
+Loading file(s) to Cordial 2
+</h3>
+The first thing the user should do when opening Cordial 2 is loading one or more files into the current session.
+There are three diferent ways of doing this.
+
+<p>
+First, one can load a previous session (<u>F</u>ile -> load sessio<u>n</u>), this will load all the files and connections from such session. By default these are saved under <tt>/home/username/CORDIAL-SERVER/sessions</tt>.
+</p>
+
+<p>
+One can also load single nifti files to (<u>F</u>ile -> load sessio<u>n</u>).
+</p>
+
+<p>
+Finally, many nifti files can be loaded at once with the load directory (<u>F</u>ile -> load sessio<u>n</u>).
+This option opens another widget, called "Add". Rules made up of filenames and/or wildcards must glued together in a graph so that the matching files and subfiles of the chosen directory are loaded. The wildcard symbol is the asterisk *.
+</p>
+Here are some examples.
+
+<figure>
+    <img src="images/rule_1.png" alt="The main widget">
+    <figcaption>Load all files ending in ".nii.gz" .</figcaption>
+</figure>
+
+<figure>
+    <img src="images/rule_2.png" alt="The main widget">
+    <figcaption>Load all files ending in ".nii.gz", except those that start with "T3_" .</figcaption>
+</figure>
+
+<figure>
+    <img src="images/rule_3.png" alt="The main widget">
+    <figcaption>Load all files ending in ".nii" or ".nii.gz", but ignore those those that are called "labelmap.nii.gz".</figcaption>
+</figure>
+
+<h3>
+    Managing loaded files
+</h3>
+...
