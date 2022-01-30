@@ -1,13 +1,5 @@
 <h2> Using Cordial 2 </h2>
-<p>
-This section describes how to use Cordial 2 for the end-user, i.e. the client side.
-Readers interested in managing the server-side of Cordial 2 are advised to read the <a href="todo"> Cordial 2 Developer Manual instead</a>.
-</p>
-
-
-<p>
 When firing up Cordial 2, the user is greeted with the Widget shown below in Fig. 1. It is comprised of three tabs (Overview, Server and Statistics) and a menu bar called <u>F</u>ile.
-</p>
 
 <figure>
     <img src="images/main_widget.png" alt="The main widget">
@@ -52,4 +44,27 @@ Here are some examples.
 <h3>
     Managing loaded files
 </h3>
-...
+Once files are loaded, they can be marked as favorites, viewd in MRIcron, removed from the list, or pushed to the server.
+The former three can be done by done by right clicking a file in the tree view. Note that if a directory is right clicked, then there is the possibility of removing
+all of its contents from the current session directly.
+Pushing files to the server is done by clicking <u>F</u>ile (from the menu bar) and then "Pus<u>h</u> files to server", there it can be decided which files are processed (all files, only favorites, or all files except for favorites).
+When pushing files to the server, it is also possible to choose whether to automatically assign a GPU index, or to enter it manually, and this feature used to cause a bug, so for the moment a GPU will be assgined automatically regardless of what option is chosen.
+
+
+
+<h3>
+    The server tab
+</h3>
+Each time files are pushed to the queue, a server connection is added to the session, which can be shown in the server tab.
+Server connections can and should be saved by using File <u>F</u>ile -> save sessio<u>n</u>.
+To watch the progress of a segmentation connection, click on one and wait a few seconds for a server response. The picture below shows an example of a server connection running.
+
+<figure>
+    <img src="images/server.png" alt="The server tab">
+    <figcaption>The server tab, showing the progress of the current connection.</figcaption>
+</figure>
+
+<h3>
+    The statistics tab
+</h3>
+Files that are already segmented and verified can be used for statiscal evaluations. First, it is necessary to run 
