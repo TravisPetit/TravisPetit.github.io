@@ -8,3 +8,32 @@
     <li> <b>About the applications of Cordial / Cordial 2:</b> Tsagkas Charidimos </li>
     <li> <b>About Cordial 1</b>: Simon Pezold </li>
 </ul>
+
+<h2>Programming Matters</h2>
+<ul>
+    <li> <b>What is saved under the docker volume cordial_data?</b></li>
+    <p> Every output of every program in the pipeline is stored there. These files are then compressed into a tar file and sent back to the user. And this tar file is automatically decompressed after download. </p>
+    <li> <b> Why are you copying the data into a volume cordial_data and not mounting the data directly? Do you see problems if I simplify this and mount the repo directly? </b> </li>
+    <p> Mounting the data directly would be ideal. However this was not possible at first due to complicated reasons involving permissions and docker. But now that the program runs a "nicer" workstation, it would be possible to remove cordial_data_helper completely. I did not do it yet because I don't have the time for it. </p>
+    <li> <b>Why did you integrate GitLFS? Can I take it out again? It takes way too long to work with git now. "git status" alone takes ~3min.</b></li>
+    <p>I used LFS because the neural network checkpoints are in the repository, and each checkpoint is about 1 GB. This is also the reason why git status it takes so long.</p>
+
+    <li> <b>Can you briefly explain where the backend is told which script is being executed? As far as I understand, the script should be sent with the request.</b> </li>
+    <p>
+    The user sends requests to the server, these requests are located in /src/server/serverconnection.py.
+
+    The most interesting request is the POST request, which starts the script in src/server/cordial_working_directory/runfiles/run.sh (in the server). (This can be changed in src/server/config_folder/config.json).
+
+    There are other requests (to download files, query progress, etc.) documented by Norbert in a README file located in the same place as the specto2 binary.
+    </p>
+
+    <li><b>How is the appropriate segmentation metadata based on a source file loaded (in the session file under # Files:)?</b></li>
+    <p>Each NIFTI image is assigned a unique hash value.
+
+    All data related to an image (metadata, segmentation) is stored in a folder (namely /home/CORDIAL-SERVER/segmentations)
+    So, if the program is going to compare the metadata of
+    file.nifti with the hash value 123, it loads the file /home/CORDIAL-SERVER/segmentations/123/metadata.txt
+    </p>
+
+</ul>
+
